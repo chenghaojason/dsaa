@@ -6,16 +6,16 @@ package com.jason.structure.linearity.linear;
  * @author WangChenHol
  * @date 2021/1/22 14:24
  **/
-public class LinkList implements LinearList {
+public class SingleLinkedList implements LinearList {
 
-    public Node head; // 头指针
+    public Node head; // 头指针。线性表的第一个结点的存储地址称为头指针。
     private boolean order = false; // true：头插法，false：尾插法
 
-    public LinkList() {
-        head = new Node();
+    public SingleLinkedList() {
+        head = new Node(); // 初始化头结点
     }
 
-    public LinkList(boolean order) {
+    public SingleLinkedList(boolean order) {
         this();
         this.order = order;
     }
@@ -126,9 +126,11 @@ public class LinkList implements LinearList {
         sb.append("[");
         Node node = head.next;
         while (node != null) {
-            sb.append(node.data).append(" ");
+            sb.append(node.data).append(", ");
             node = node.next;
         }
+        sb.deleteCharAt(sb.length()-2);
+        sb.deleteCharAt(sb.length()-1);
         sb.append("]");
         System.out.println(sb.toString());
     }

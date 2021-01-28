@@ -32,7 +32,7 @@ public interface LinearList {
      */
     void insert(int i, Object e) throws Exception;
 
-    void add(Object object);
+    void add(Object object) throws Exception;
 
     /**
      * 删除并返回线性表中第i个数据元素。其中i的取值范围：0 <= i <= length()-1
@@ -47,5 +47,5 @@ public interface LinearList {
     /**
      * 输出线性表中各个数据元素的值
      */
-    void display();
+    void display() throws Exception;
 }
