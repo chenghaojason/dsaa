@@ -8,7 +8,7 @@ package com.jason.structure.linearity.linear;
  **/
 public class SingleLinkedList implements LinearList {
 
-    public Node head; // 头指针。线性表的第一个结点的存储地址称为头指针。
+    public final Node head; // 头指针。线性表的第一个结点的存储地址称为头指针。
     private boolean order = false; // true：头插法，false：尾插法
 
     public SingleLinkedList() {
@@ -125,6 +125,11 @@ public class SingleLinkedList implements LinearList {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         Node node = head.next;
+        extracted(sb, node);
+        System.out.println(sb.toString());
+    }
+
+    private void extracted(StringBuilder sb, Node node) {
         while (node != null) {
             sb.append(node.data).append(", ");
             node = node.next;
@@ -132,6 +137,5 @@ public class SingleLinkedList implements LinearList {
         sb.deleteCharAt(sb.length()-2);
         sb.deleteCharAt(sb.length()-1);
         sb.append("]");
-        System.out.println(sb.toString());
     }
 }

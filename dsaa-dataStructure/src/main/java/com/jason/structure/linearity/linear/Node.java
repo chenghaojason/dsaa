@@ -1,7 +1,7 @@
 package com.jason.structure.linearity.linear;
 
 /**
- * 结点类
+ * 单向结点类
  *
  * @author WangChenHol
  * @date 2021/1/22 10:21

@@ -1,16 +1,22 @@
-package com.jason.structure.linearity;
+package com.jason.structure.linearity.linear;
 
-import com.jason.structure.linearity.linear.CirularLinkedList;
-import com.jason.structure.linearity.linear.OrderList;
-import com.jason.structure.linearity.linear.SingleLinkedList;
+import org.junit.Test;
+
+import java.util.LinkedList;
 
 /**
+ * 线性结构测试
+ *
  * @author WangChenHol
- * @date 2021/1/21 15:42
+ * @date 2021/1/29 10:46
  **/
 public class TestLinear {
-    public static void main(String[] args) throws Exception {
-        System.out.println("============== 顺序表 ====================");
+
+    /**
+     * 测试顺序表
+     */
+    @Test
+    public void TestOrderList() {
         OrderList list = new OrderList(10);
         list.insert(0, "aaa");
         list.add("111");
@@ -31,9 +37,15 @@ public class TestLinear {
         System.out.println(list.remove(2));
         list.display();
         System.out.println(list.length());
+    }
 
-
-        System.out.println("============== 单链表 ====================");
+    /**
+     * 单链表
+     *
+     * @throws Exception 异常
+     */
+    @Test
+    public void TestSingleLinkedList() throws Exception {
         SingleLinkedList linkList = new SingleLinkedList(true);
         linkList.insert(0, "aaa");
         linkList.insert(1, "bbb");
@@ -50,8 +62,13 @@ public class TestLinear {
         linkList.add("333");
         linkList.display();
         System.out.println(linkList.length());
+    }
 
-        System.out.println("============== 循环链表 ====================");
+    /**
+     * 循环表（单链表）
+     */
+    @Test
+    public void TestCirularLinkedList() throws Exception {
         CirularLinkedList cirularLinkedList = new CirularLinkedList();
         cirularLinkedList.insert(0, "aaa");
         cirularLinkedList.display();
@@ -83,5 +100,53 @@ public class TestLinear {
         cirularLinkedList.display();
         System.out.println("第2个元素：" + cirularLinkedList.get(2));
         System.out.println("链表的长度：" + cirularLinkedList.length());
+
     }
+
+    /**
+     * 测试双向链表
+     */
+    @Test
+    public void testDoubleLinkedList() {
+        try {
+            DoubleLinkedList list = new DoubleLinkedList();
+            System.out.println("============== 操作之前 ==============");
+            System.out.println("是否为空：" + list.isEmpty());
+            System.out.println("长度：" + list.length());
+
+            list.insert(0, "000");
+            list.display();
+            list.insert(1, 111);
+            list.display();
+            list.insert(2, 222);
+            list.display();
+            list.insert(0, "00000");
+            list.display();
+            list.insert(1, "111111");
+            list.display();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    @Test
+//    public void Test(){
+//        LinkedList<String> list = new LinkedList<>();
+//        list.add(0,"000");
+//        list.add(1,"111");
+//        list.add(2,"222");
+//        list.add(0,"000000");
+//        list.add(1,"111111");
+//        System.out.println(list.toString());
+//    }
+//
+//    @Test
+//    public void test1(){
+//        System.out.println(1>>1);
+//        System.out.println(2>>1);
+//        System.out.println(3>>1);
+//        System.out.println(4>>1);
+//        System.out.println(5>>1);
+//        System.out.println(6>>1);
+//    }
 }

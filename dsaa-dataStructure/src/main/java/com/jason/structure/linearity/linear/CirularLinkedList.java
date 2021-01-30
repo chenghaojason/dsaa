@@ -85,7 +85,7 @@ public class CirularLinkedList implements LinearList {
     }
 
     @Override
-    public void add(Object object) throws Exception {
+    public void add(Object object) {
         // 添加到尾部
         Node node = new Node(object);
 
