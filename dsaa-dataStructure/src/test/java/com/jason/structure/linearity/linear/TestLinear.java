@@ -124,6 +124,18 @@ public class TestLinear {
             list.display();
             list.insert(1, "111111");
             list.display();
+            list.add("aaa");
+            list.add("bbb");
+            list.display();
+            list.insert(7,"cccccc");
+            list.display();
+            System.out.println("是否为空：" + list.isEmpty());
+            System.out.println("长度：" + list.length());
+            System.out.println("第3个元素："+list.get(3));
+            System.out.println("aaa的位置："+list.indexOf("aaa"));
+            System.out.println("删除第4个元素"+list.remove(4));
+            list.display();
+            System.out.println("长度：" + list.length());
         } catch (Exception e) {
             e.printStackTrace();
         }
