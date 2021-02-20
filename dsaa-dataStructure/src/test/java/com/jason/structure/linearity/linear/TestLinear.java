@@ -141,24 +141,27 @@ public class TestLinear {
         }
     }
 
-//    @Test
-//    public void Test(){
-//        LinkedList<String> list = new LinkedList<>();
-//        list.add(0,"000");
-//        list.add(1,"111");
-//        list.add(2,"222");
-//        list.add(0,"000000");
-//        list.add(1,"111111");
-//        System.out.println(list.toString());
-//    }
-//
-//    @Test
-//    public void test1(){
-//        System.out.println(1>>1);
-//        System.out.println(2>>1);
-//        System.out.println(3>>1);
-//        System.out.println(4>>1);
-//        System.out.println(5>>1);
-//        System.out.println(6>>1);
-//    }
+    @Test
+    public void Test(){
+        LinkedList<String> list = new LinkedList<>();
+        list.add(0,"000");
+        list.add(1,"111");
+        list.add(2,"222");
+        list.add(0,"000000");
+        list.add(1,"111111");
+        System.out.println(list.toString());
+    }
+
+    @Test
+    public void test1(){
+        System.out.println(1>>1);
+        System.out.println(2>>1);
+        System.out.println(3>>1);
+        System.out.println(4>>1);
+        System.out.println(5>>1);
+        System.out.println(6>>1);
+        System.out.println(7>>1);
+        System.out.println(8>>1);
+        System.out.println(9>>1);
+    }
 }
