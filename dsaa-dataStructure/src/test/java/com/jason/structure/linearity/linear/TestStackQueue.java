@@ -1,5 +1,6 @@
 package com.jason.structure.linearity.linear;
 
+import com.jason.structure.linearity.stacks.BigNumberSum;
 import com.jason.structure.linearity.stacks.IStack;
 import com.jason.structure.linearity.stacks.OrderStack;
 import org.junit.Test;
@@ -40,5 +41,18 @@ public class TestStackQueue {
         System.out.println(stack.toString());
         System.out.println("栈的长度：" + stack.length());
         stack.push(1111111);
+    }
+
+    @Test
+    public void testBigNumberSum() throws Exception {
+        BigNumberSum sum = new BigNumberSum();
+        System.out.println(sum.add("123", "3"));
+        System.out.println(sum.add("123", "123"));
+        System.out.println(sum.add("1234", "1234"));
+        System.out.println(sum.add("8888 1888", "2"));
+        System.out.println(sum.add("6666", "7777 777"));
+        System.out.println(sum.add("9999 9999 9", "0"));
+        System.out.println(sum.add("9999 9999 9", "1"));
+        System.out.println(sum.add("9999 9999 9", "3"));
     }
 }
