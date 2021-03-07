@@ -24,7 +24,7 @@ public interface IQueue<T> {
      *
      * @return true，队列满了
      */
-    boolean isFull();
+    boolean isFull() throws Exception;
 
     /**
      * 返回队列中元素的个数

@@ -17,7 +17,7 @@ public class CircleQueue<T> implements IQueue<T> {
     private int length; // 队列的数据元素个数
     private int front; // 指向队首的数据元素位置，如果为空队列，则值为0
     private int tail; // 指向队尾的数据元素下一个的位置，如果空队列，则为0
-    private int maxSize; // 队列所存储元素的最大个数
+    private final int maxSize; // 队列所存储元素的最大个数
 
     /**
      * 默认状态下队列的最大存储16个数据元素
@@ -25,6 +25,7 @@ public class CircleQueue<T> implements IQueue<T> {
     public CircleQueue() {
         front = tail = 0;
         this.maxSize = 16;
+        queueElm = new Object[16];
     }
 
     public CircleQueue(int maxSize) {
