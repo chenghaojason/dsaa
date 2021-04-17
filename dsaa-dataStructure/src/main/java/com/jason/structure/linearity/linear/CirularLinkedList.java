@@ -141,7 +141,7 @@ public class CirularLinkedList implements LinearList {
     }
 
     @Override
-    public void display() throws Exception {
+    public String display() throws Exception {
         StringBuilder str = new StringBuilder();
         str.append("[");
         Node temp = head;
@@ -152,6 +152,6 @@ public class CirularLinkedList implements LinearList {
         str.deleteCharAt(str.length() - 2);
         str.deleteCharAt(str.length() - 1);
         str.append("]");
-        System.out.println("循环链表：" + str.toString());
+        return str.toString();
     }
 }

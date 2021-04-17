@@ -94,13 +94,13 @@ public class OrderList implements LinearList {
     }
 
     @Override
-    public void display() {
+    public String display() {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (Object o : elements) {
             builder.append(o).append(" ");
         }
         builder.append("]");
-        System.out.println(builder.toString());
+        return builder.toString();
     }
 }

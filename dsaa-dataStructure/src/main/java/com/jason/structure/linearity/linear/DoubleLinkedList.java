@@ -127,12 +127,12 @@ public class DoubleLinkedList implements LinearList {
     }
 
     @Override
-    public void display() {
+    public String display() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         DoubleNode next = head.next;
         extracted(sb, next);
-        System.out.println("双向链表：" + sb.toString());
+        return sb.toString();
     }
 
     private void extracted(StringBuilder sb, DoubleNode next) {

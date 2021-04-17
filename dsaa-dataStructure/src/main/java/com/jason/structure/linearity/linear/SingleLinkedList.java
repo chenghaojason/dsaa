@@ -121,12 +121,12 @@ public class SingleLinkedList implements LinearList {
     }
 
     @Override
-    public void display() {
+    public String display() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         Node node = head.next;
         extracted(sb, node);
-        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     private void extracted(StringBuilder sb, Node node) {
@@ -134,8 +134,8 @@ public class SingleLinkedList implements LinearList {
             sb.append(node.data).append(", ");
             node = node.next;
         }
-        sb.deleteCharAt(sb.length()-2);
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 2);
+        sb.deleteCharAt(sb.length() - 1);
         sb.append("]");
     }
 }

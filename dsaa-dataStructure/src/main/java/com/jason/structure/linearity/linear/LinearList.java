@@ -47,5 +47,5 @@ public interface LinearList {
     /**
      * 输出线性表中各个数据元素的值
      */
-    void display() throws Exception;
+    String display() throws Exception;
 }
