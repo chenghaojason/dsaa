@@ -148,8 +148,37 @@ public class OrderString implements IString {
     public int indexOf(IString str, int begin) {
         // TODO 两种匹配算法
         // Brute-Force模式匹配算法
+        return bruteForce(str, begin);
         // KMP模式匹配算法
-        return 0;
+    }
+
+    private int bruteForce(IString str, int begin) {
+        if (str == null || length == 0 || str.length() == 0) {
+            throw new NullPointerException("串不能为空");
+        }
+        int tLen = str.length(); // 被比较的串的长度
+        if (tLen > length) {
+            return -1;
+        }
+
+        int rLen = length - begin; //从当前被比较的位置开始算主串中剩余长度
+        int i = begin, j = 0;
+        while (rLen >= tLen) {
+            char c1 = charAt(i);
+            char c2 = str.charAt(j);
+            if (c1 == c2) {
+                if (j == tLen - 1) {
+                    return i - j;
+                }
+                i++;
+                j++;
+            } else {
+                i = i - j + 1;
+                j = 0;
+                rLen--;
+            }
+        }
+        return -1;
     }
 
     @Override

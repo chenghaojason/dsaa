@@ -46,7 +46,7 @@ public interface IString {
     /**
      * 插入：在当前串的第offset位置之后插入一个新的子串str。
      *
-     * @param offset 插入的位置，offset的取值范围 0 <= offset <= length
+     * @param offset 插入的位置，从此位置插入新的串。offset的取值范围 0 <= offset <= length
      * @param str    新的串
      * @return 返回新的字符串
      */
