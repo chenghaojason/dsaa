@@ -148,11 +148,14 @@ public class OrderString implements IString {
     public int indexOf(IString str, int begin) {
         // TODO 两种匹配算法
         // Brute-Force模式匹配算法
-        return bruteForce(str, begin);
+//        return bruteForceTest(str, begin);
+        return indexOf_BruteForce(str, begin);
         // KMP模式匹配算法
+//        return indexOf_KMP(str, begin);
+
     }
 
-    private int bruteForce(IString str, int begin) {
+    private int bruteForceTest(IString str, int begin) {
         if (str == null || length == 0 || str.length() == 0) {
             throw new NullPointerException("串不能为空");
         }
@@ -162,7 +165,8 @@ public class OrderString implements IString {
         }
 
         int rLen = length - begin; //从当前被比较的位置开始算主串中剩余长度
-        int i = begin, j = 0;
+        int i = begin;
+        int j = 0;
         while (rLen >= tLen) {
             char c1 = charAt(i);
             char c2 = str.charAt(j);
@@ -179,6 +183,104 @@ public class OrderString implements IString {
             }
         }
         return -1;
+    }
+
+    /**
+     * Brute-Force模式算法。最好情况下的时间复杂度是O(m)，最坏情况下的时间复杂度是O(n*m)，其中n是主串的长度，m是子串的长度。
+     *
+     * @param t     子串
+     * @param start 起始位置
+     * @return 子串在主串中的下标
+     */
+    private int indexOf_BruteForce(IString t, int start) {
+        if (t != null && t.length() > 0 && length > t.length()) {
+            int sLen, tLen, i = start, j = 0;
+            sLen = length;
+            tLen = t.length();
+
+            while (i < sLen && j < tLen) {
+                if (this.charAt(i) == t.charAt(j)) {
+                    i++;
+                    j++;
+                } else {
+                    i = i - j + 1;
+                    j = 0;
+                }
+            }
+            if (j >= tLen) {
+                return i - tLen;
+            } else {
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+    private int indexOf_KMP(IString t, int start) {
+        int[] next = getNext(t);
+        int i = start;
+        int j = 0;
+        while (i < this.length && j < t.length()) {
+            if (j == -1 || this.charAt(i) == t.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                j = next[j];
+            }
+        }
+        if (j < t.length()) {
+            return -1;
+        } else {
+            return i - t.length();
+        }
+    }
+
+    /**
+     * next[j]函数
+     *
+     * @param string 模式串
+     * @return 函数
+     */
+    public int[] getNext(IString string) {
+        int[] next = new int[string.length()];
+        int j = 1;
+        int k = 0;
+        next[0] = -1;
+        next[1] = 0;
+        while (j < string.length() - 1) {
+            if (string.charAt(j) == string.charAt(k)) {
+                next[j + 1] = k + 1;
+                j++;
+                k++;
+            } else if (k == 0) {
+                next[j + 1] = 0;
+                j++;
+            } else {
+                k = next[k];
+            }
+        }
+        return next;
+    }
+
+    public int[] getNextVal(IString string) {
+        int[] nextVal = new int[string.length()];
+        int j = 0;
+        int k = -1;
+        nextVal[0] = -1;
+        while (j < string.length() - 1) {
+            if (k == -1 || string.charAt(j) == string.charAt(k)) {
+                j++;
+                k++;
+                if (string.charAt(j) != string.charAt(k)) {
+                    nextVal[j] = k;
+                } else {
+                    nextVal[j] = nextVal[k];
+                }
+            } else {
+                k = nextVal[k];
+            }
+        }
+        return nextVal;
     }
 
     @Override

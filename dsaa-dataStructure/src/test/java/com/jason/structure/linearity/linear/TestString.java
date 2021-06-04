@@ -40,7 +40,7 @@ public class TestString {
     }
 
     @Test
-    public void testIndexOf(){
+    public void testIndexOf() {
         // 测试indexOf方法
         OrderString test = new OrderString("abcababcdaaaaa");
         System.out.println("下标：" + test.indexOf(new OrderString("abcd"), 0));
@@ -60,7 +60,26 @@ public class TestString {
         System.out.println("下标：" + new OrderString("aaaaa").indexOf(new OrderString("aa"), 1));
         System.out.println("下标：" + new OrderString("aaaaa").indexOf(new OrderString("aaaaa"), 1));
         System.out.println("下标：" + new OrderString("aaaaa").indexOf(new OrderString("aaaaaaa"), 1));
+        System.out.println("测试特殊情况");
+        System.out.println("下标：" + new OrderString("bbbcbbbbc").indexOf(new OrderString("bbbbc"), 0));
+        System.out.println("下标：" + new OrderString("bbbcbbbbc").indexOf(new OrderString("bbbbc"), 1));
+        System.out.println("下标：" + new OrderString("bbbcbbbbc").indexOf(new OrderString("bbbbc"), 5));
 
-        System.out.println("下标：" + new OrderString("aaaaa").indexOf(new OrderString(""), 1));
+
+    }
+
+    @Test
+    public void testKMP() {
+        OrderString string = new OrderString("");
+        int[] next = string.getNext(new OrderString("bbbbc"));
+        for (int n : next) {
+            System.out.print(n + " ");
+        }
+        System.out.println("");
+        int[] nextVal = string.getNextVal(new OrderString("bbbbc"));
+        for (int n : nextVal) {
+            System.out.print(n + " ");
+        }
+        System.out.println("");
     }
 }
