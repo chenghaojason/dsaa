@@ -2,26 +2,25 @@ package com.jason.structure.linearity.array;
 
 /**
  * 对称矩阵。
- * 对称线a00,a11,a22,a33,...,ann
+ * <pre>
+ *      对称线a00,a11,a22,a33,...,ann。
+ *      以行优先顺序存储。
+ * </pre>
  *
  * @author WangChenHol
  * @date 2021/6/4 14:27
  **/
-public class SymmetricMatrix implements IArray {
-
-    private final Object[] array; // 存放元素的数组
-    private final int sideLength; // 边长 n * n
-    private int times; // 操作次数
+public class SymmetricMatrix extends IArray {
 
     public SymmetricMatrix(int sideLength) {
         this.sideLength = sideLength;
         int length = sideLength * (sideLength + 1) / 2;
-        array = new Object[length];
+        element = new Object[length];
     }
 
     @Override
     public int length() {
-        return times;
+        return element.length;
     }
 
     @Override
@@ -32,7 +31,8 @@ public class SymmetricMatrix implements IArray {
     @Override
     public Object getValue(int line, int row) throws Exception {
         checkIndex(line, row);
-        return array[getIndex(line, row)];
+        Object value = element[getIndex(line, row)];
+        return value;
     }
 
     @Override
@@ -52,16 +52,19 @@ public class SymmetricMatrix implements IArray {
     public void assign(Object value, int line, int row) throws Exception {
         checkIndex(line, row);
         int index = getIndex(line, row);
-        array[index] = value;
-        times++;
+        element[index] = value;
+        count++;
     }
 
+    /**
+     * 很具矩阵的坐标获取压缩数组的下标
+     *
+     * @param line 横坐标
+     * @param row  竖坐标
+     * @return 数组的下标
+     */
     @Override
-    public Object[] getArray() {
-        return array;
-    }
-
-    private int getIndex(int line, int row) {
+    protected int getIndex(int line, int row) {
         if (line >= row) {
             return line * (line + 1) / 2 + row;
         } else {
@@ -69,30 +72,19 @@ public class SymmetricMatrix implements IArray {
         }
     }
 
+
     @Override
-    public String toString() {
+    public String displayValues() {
         StringBuilder rs = new StringBuilder();
         for (int i = 0; i < sideLength; i++) {
             rs.append("|\t");
             for (int j = 0; j < sideLength; j++) {
-                Object obj = array[getIndex(i, j)];
+                Object obj = element[getIndex(i, j)];
                 rs.append(obj == null ? "" : obj.toString()).append("\t");
             }
             rs.append("|\r\n");
         }
         return rs.toString();
-    }
-
-    public String values() {
-        StringBuilder values = new StringBuilder();
-        for (Object obj : array) {
-            if (obj == null) {
-                values.append(" ").append(", ");
-            } else {
-                values.append(obj.toString()).append(", ");
-            }
-        }
-        return values.substring(0, values.length() - 2);
     }
 
     private void checkIndex(int line, int row) throws Exception {
