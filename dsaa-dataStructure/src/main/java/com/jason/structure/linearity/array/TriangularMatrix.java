@@ -51,6 +51,14 @@ public class TriangularMatrix extends IArray {
         return value;
     }
 
+    /**
+     * 如果存储位置不符合三角矩阵的规则，则将存储的数据元素置为0存储。
+     *
+     * @param line  行坐标
+     * @param row   列坐标
+     * @param value 数据元素
+     * @return 最终存储的数据
+     */
     private Object changeValue(int line, int row, Object value) {
         if (isLowerTriangularMatrix && row > line) {
             value = 0;

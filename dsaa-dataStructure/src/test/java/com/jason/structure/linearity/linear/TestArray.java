@@ -1,5 +1,6 @@
 package com.jason.structure.linearity.linear;
 
+import com.jason.structure.linearity.array.DiagonalMatrix;
 import com.jason.structure.linearity.array.IArray;
 import com.jason.structure.linearity.array.SymmetricMatrix;
 import com.jason.structure.linearity.array.TriangularMatrix;
@@ -97,5 +98,25 @@ public class TestArray {
         System.out.println(matrix.toString());
         System.out.println(matrix.displayValues());
         System.out.println("总数：" + matrix.getEleCount() + "  第2,1元素为:" + matrix.getValue(2, 1) + "  第2，4元素为:" + matrix.getValue(2, 4));
+    }
+    @Test
+    public void testDiagonalMatrix() throws Exception {
+        DiagonalMatrix matrix = new DiagonalMatrix(6, 2);
+        matrix.assign("A", 0, 0);
+        matrix.assign("B", 0, 1);
+        matrix.assign("C", 1, 0);
+        matrix.assign("D", 1, 1);
+        matrix.assign("E", 1, 2);
+        matrix.assign("F", 2, 1);
+        matrix.assign("G", 2, 2);
+        matrix.assign("H", 2, 3);
+        matrix.assign("I", 3, 2);
+        matrix.assign("J", 3, 3);
+        matrix.assign("K", 3, 4);
+        matrix.assign("L", 4, 3);
+        matrix.assign("M", 4, 4);
+
+        System.out.println(matrix.toString());
+        System.out.println(matrix.displayValues());
     }
 }

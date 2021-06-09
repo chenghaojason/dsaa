@@ -31,8 +31,7 @@ public class SymmetricMatrix extends IArray {
     @Override
     public Object getValue(int line, int row) throws Exception {
         checkIndex(line, row);
-        Object value = element[getIndex(line, row)];
-        return value;
+        return element[getIndex(line, row)];
     }
 
     @Override

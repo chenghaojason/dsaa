@@ -67,7 +67,7 @@ public abstract class IArray {
         return count;
     }
 
-    protected abstract int getIndex(int line, int row);
+    protected abstract int getIndex(int line, int row) throws Exception;
 
     /**
      * 将矩阵按照规则在页面展示出来
