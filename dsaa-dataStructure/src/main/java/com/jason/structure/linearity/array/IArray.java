@@ -31,11 +31,11 @@ public abstract class IArray {
     /**
      * 取值，二维数组
      *
-     * @param line 行下标
-     * @param row  列下标
+     * @param row 行下标
+     * @param column  列下标
      * @return 值
      */
-    public abstract Object getValue(int line, int row) throws Exception;
+    public abstract Object getValue(int row, int column) throws Exception;
 
 
     /**
@@ -49,10 +49,10 @@ public abstract class IArray {
     /**
      * 给数组赋值，二维数组
      *
-     * @param line 值
-     * @param row  下标
+     * @param row 值
+     * @param column  下标
      */
-    public abstract void assign(Object value, int line, int row) throws Exception;
+    public abstract void assign(Object value, int row, int column) throws Exception;
 
     /**
      * 获取压缩存储的二维数组
@@ -67,7 +67,7 @@ public abstract class IArray {
         return count;
     }
 
-    protected abstract int getIndex(int line, int row) throws Exception;
+    protected abstract int getIndex(int row, int column) throws Exception;
 
     /**
      * 将矩阵按照规则在页面展示出来

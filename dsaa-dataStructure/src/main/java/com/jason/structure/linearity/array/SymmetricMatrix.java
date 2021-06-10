@@ -29,9 +29,9 @@ public class SymmetricMatrix extends IArray {
     }
 
     @Override
-    public Object getValue(int line, int row) throws Exception {
-        checkIndex(line, row);
-        return element[getIndex(line, row)];
+    public Object getValue(int row, int column) throws Exception {
+        checkIndex(row, column);
+        return element[getIndex(row, column)];
     }
 
     @Override
@@ -43,14 +43,14 @@ public class SymmetricMatrix extends IArray {
      * 主要操作，对称矩阵的压缩存储算法
      *
      * @param value 存储的值
-     * @param line  行
-     * @param row   列
+     * @param row  行
+     * @param column   列
      * @throws Exception 当存储时行或者列取值范围不合法时抛出异常
      */
     @Override
-    public void assign(Object value, int line, int row) throws Exception {
-        checkIndex(line, row);
-        int index = getIndex(line, row);
+    public void assign(Object value, int row, int column) throws Exception {
+        checkIndex(row, column);
+        int index = getIndex(row, column);
         element[index] = value;
         count++;
     }
@@ -58,16 +58,16 @@ public class SymmetricMatrix extends IArray {
     /**
      * 很具矩阵的坐标获取压缩数组的下标
      *
-     * @param line 横坐标
-     * @param row  竖坐标
+     * @param row 横坐标
+     * @param column  竖坐标
      * @return 数组的下标
      */
     @Override
-    protected int getIndex(int line, int row) {
-        if (line >= row) {
-            return line * (line + 1) / 2 + row;
+    protected int getIndex(int row, int column) {
+        if (row >= column) {
+            return row * (row + 1) / 2 + column;
         } else {
-            return row * (row + 1) / 2 + line;
+            return column * (column + 1) / 2 + row;
         }
     }
 
@@ -86,8 +86,8 @@ public class SymmetricMatrix extends IArray {
         return rs.toString();
     }
 
-    private void checkIndex(int line, int row) throws Exception {
-        if (line < 0 || row < 0 || (line > sideLength - 1 || row > sideLength - 1)) {
+    private void checkIndex(int row, int column) throws Exception {
+        if (row < 0 || column < 0 || (row > sideLength - 1 || column > sideLength - 1)) {
             throw new Exception("矩阵下标不合法");
         }
     }

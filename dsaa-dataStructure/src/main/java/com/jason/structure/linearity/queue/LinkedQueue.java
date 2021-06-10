@@ -1,6 +1,6 @@
 package com.jason.structure.linearity.queue;
 
-import com.jason.structure.linearity.linear.Node;
+import com.jason.structure.nodes.Node;
 
 /**
  * 链队列

@@ -16,8 +16,7 @@ public class TriangularMatrix extends IArray {
     private boolean isLowerTriangularMatrix = true; // 是否是下三角矩阵，默认是下三角矩阵
 
     public TriangularMatrix(int sideLength) {
-        this.sideLength = sideLength;
-        element = new Object[getElementLength()];
+        this(sideLength, true);
     }
 
     public TriangularMatrix(int sideLength, boolean isLowerTriangularMatrix) {
@@ -44,26 +43,26 @@ public class TriangularMatrix extends IArray {
     }
 
     @Override
-    public Object getValue(int line, int row) throws Exception {
-        checkIndex(line, row);
-        Object value = element[getIndex(line, row)];
-        value = changeValue(line, row, value);
+    public Object getValue(int row, int column) throws Exception {
+        checkIndex(row, column);
+        Object value = element[getIndex(row, column)];
+        value = changeValue(row, column, value);
         return value;
     }
 
     /**
      * 如果存储位置不符合三角矩阵的规则，则将存储的数据元素置为0存储。
      *
-     * @param line  行坐标
-     * @param row   列坐标
-     * @param value 数据元素
+     * @param row    行坐标
+     * @param column 列坐标
+     * @param value  数据元素
      * @return 最终存储的数据
      */
-    private Object changeValue(int line, int row, Object value) {
-        if (isLowerTriangularMatrix && row > line) {
+    private Object changeValue(int row, int column, Object value) {
+        if (isLowerTriangularMatrix && column > row) {
             value = 0;
         }
-        if (!isLowerTriangularMatrix && line > row) {
+        if (!isLowerTriangularMatrix && row > column) {
             value = 0;
         }
         return value;
@@ -75,10 +74,10 @@ public class TriangularMatrix extends IArray {
     }
 
     @Override
-    public void assign(Object value, int line, int row) throws Exception {
-        checkIndex(line, row);
-        value = changeValue(line, row, value);
-        int index = getIndex(line, row);
+    public void assign(Object value, int row, int column) throws Exception {
+        checkIndex(row, column);
+        value = changeValue(row, column, value);
+        int index = getIndex(row, column);
         element[index] = value;
         count++;
     }
@@ -97,8 +96,8 @@ public class TriangularMatrix extends IArray {
         return rs.toString();
     }
 
-    private void checkIndex(int line, int row) throws Exception {
-        if (line < 0 || row < 0 || line > sideLength - 1 || row > sideLength - 1) {
+    private void checkIndex(int row, int column) throws Exception {
+        if (row < 0 || column < 0 || row > sideLength - 1 || column > sideLength - 1) {
             throw new Exception("矩阵下标不合法");
         }
     }
@@ -106,16 +105,16 @@ public class TriangularMatrix extends IArray {
     /**
      * 根据矩阵的坐标计算出在数组中的下标。
      *
-     * @param line 横坐标
-     * @param row  竖坐标
+     * @param row    横坐标
+     * @param column 竖坐标
      * @return 数组下标
      */
     @Override
-    protected int getIndex(int line, int row) {
+    protected int getIndex(int row, int column) {
         if (isLowerTriangularMatrix) {
-            return line * (line + 1) / 2 + row;
+            return row * (row + 1) / 2 + column;
         } else {
-            return row * (row + 1) / 2 + line;
+            return column * (column + 1) / 2 + row;
         }
     }
 }

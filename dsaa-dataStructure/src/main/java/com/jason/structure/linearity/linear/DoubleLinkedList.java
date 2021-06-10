@@ -1,5 +1,7 @@
 package com.jason.structure.linearity.linear;
 
+import com.jason.structure.nodes.DoubleNode;
+
 import java.util.Objects;
 
 /**

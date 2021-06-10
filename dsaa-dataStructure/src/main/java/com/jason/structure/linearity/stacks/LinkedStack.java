@@ -1,6 +1,6 @@
 package com.jason.structure.linearity.stacks;
 
-import com.jason.structure.linearity.linear.Node;
+import com.jason.structure.nodes.Node;
 
 /**
  * @author WangChenHol

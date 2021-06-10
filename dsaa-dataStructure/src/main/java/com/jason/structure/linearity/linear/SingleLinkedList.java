@@ -1,5 +1,7 @@
 package com.jason.structure.linearity.linear;
 
+import com.jason.structure.nodes.Node;
+
 /**
  * 单链表实现
  *

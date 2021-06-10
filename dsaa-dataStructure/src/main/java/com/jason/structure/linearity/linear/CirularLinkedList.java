@@ -1,5 +1,7 @@
 package com.jason.structure.linearity.linear;
 
+import com.jason.structure.nodes.Node;
+
 /**
  * 循环链表，使用头指针来标识循环链表
  *

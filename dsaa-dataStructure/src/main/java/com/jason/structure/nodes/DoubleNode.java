@@ -1,4 +1,4 @@
-package com.jason.structure.linearity.linear;
+package com.jason.structure.nodes;
 
 /**
  * 双向结点类

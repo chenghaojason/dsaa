@@ -1,9 +1,6 @@
 package com.jason.structure.linearity.linear;
 
-import com.jason.structure.linearity.array.DiagonalMatrix;
-import com.jason.structure.linearity.array.IArray;
-import com.jason.structure.linearity.array.SymmetricMatrix;
-import com.jason.structure.linearity.array.TriangularMatrix;
+import com.jason.structure.linearity.array.*;
 import org.junit.Test;
 
 /**
@@ -99,6 +96,7 @@ public class TestArray {
         System.out.println(matrix.displayValues());
         System.out.println("总数：" + matrix.getEleCount() + "  第2,1元素为:" + matrix.getValue(2, 1) + "  第2，4元素为:" + matrix.getValue(2, 4));
     }
+
     @Test
     public void testDiagonalMatrix() throws Exception {
         DiagonalMatrix matrix = new DiagonalMatrix(6, 2);
@@ -118,5 +116,36 @@ public class TestArray {
 
         System.out.println(matrix.toString());
         System.out.println(matrix.displayValues());
+    }
+
+    /**
+     * 稀疏矩阵的三元数组顺序存储
+     */
+    @Test
+    public void testSparseMatrix() throws Exception {
+        SparseMatrixTriple matrixTriple = new SparseMatrixTriple();
+        matrixTriple.assign(0, 3, 5);
+        matrixTriple.assign(0, 5, 1);
+        matrixTriple.assign(1, 4, 3);
+        matrixTriple.assign(2, 0, 9);
+        matrixTriple.assign(3, 3, 2);
+        matrixTriple.assign(4, 5, 7);
+        System.out.println(matrixTriple.display());
+    }
+
+    @Test
+    public void testSparseMatrixOrthogonalList() throws Exception {
+        SparseMatrixOrthogonalList list = new SparseMatrixOrthogonalList(5,5);
+        list.assign(2,0,9);
+        list.assign(2,4,8);
+        list.assign(2,1,1);
+        list.assign(2,1,2);
+        list.assign(1,4,7);
+        list.assign(3,4,6);
+        list.assign(3,0,5);
+        list.assign(3,3,4);
+        list.assign(0,0,3);
+        list.assign(0,1,2);
+        System.out.println(list.display());
     }
 }
