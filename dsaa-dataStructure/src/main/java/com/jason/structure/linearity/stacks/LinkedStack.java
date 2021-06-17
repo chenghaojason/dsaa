@@ -3,6 +3,8 @@ package com.jason.structure.linearity.stacks;
 import com.jason.structure.nodes.Node;
 
 /**
+ * 链式栈的实现
+ *
  * @author WangChenHol
  * @date 2021/3/3 14:51
  **/
@@ -45,7 +47,7 @@ public class LinkedStack implements IStack {
     }
 
     @Override
-    public void push(Object obj) throws Exception {
+    public void push(Object obj) {
         Node node = new Node(obj);
         node.next = head;
         head = node;

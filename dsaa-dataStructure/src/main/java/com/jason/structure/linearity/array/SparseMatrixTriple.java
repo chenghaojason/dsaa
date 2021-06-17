@@ -67,7 +67,8 @@ public class SparseMatrixTriple {
     public void assign(int row, int column, Object value) {
         // 先判断三元组是否需要扩容
         if (nums == 16) {
-            int copyCount = nums / 2 + nums;
+            int i = nums >> 1;
+            int copyCount = i + nums;
             TripleNode[] copyDatas = new TripleNode[copyCount];
             System.arraycopy(datas, 0, copyDatas, 0, nums);
             datas = copyDatas;

@@ -8,9 +8,9 @@ package com.jason.structure.linearity.stacks;
  **/
 public class OrderStack implements IStack {
 
-    private Object[] stackElem; //存储数据元素的数组
+    private final Object[] stackElem; //存储数据元素的数组
     private int top; //指针。指向栈顶元素下一个存储单元的位置。
-    private int capacity; // 最大容量
+    private final int capacity; // 最大容量
 
     public OrderStack(int maxSize) {
         capacity = maxSize;
