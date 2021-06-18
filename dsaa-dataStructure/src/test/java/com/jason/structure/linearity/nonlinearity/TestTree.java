@@ -1,6 +1,7 @@
 package com.jason.structure.linearity.nonlinearity;
 
 import com.jason.structure.nonlinearity.tree.BinaryTree;
+import com.jason.structure.nonlinearity.tree.HuffmanTree;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.Test;
 
@@ -37,10 +38,17 @@ public class TestTree {
         System.out.println("结点总数：" + abcdefgh.count(abcdefgh.getRoot()));
         System.out.println("深度：" + abcdefgh.depth());
 
-        System.out.println(abcdefgh.isEquals(new BinaryTree("ABDHECFG","DHBEAFCG")));
-        System.out.println(abcdefgh.isEquals(new BinaryTree("ABDHECFG","HDBEAFCG")));
-        System.out.println(new BinaryTree("ABCDEFG",0).isEquals(new BinaryTree("ABDECFG","DBEAFCG")));
-        System.out.println(new BinaryTree("ABCDEFG",0).isEquals(new BinaryTree("ABDECGF","DBEAGCF")));
+        System.out.println(abcdefgh.isEquals(new BinaryTree("ABDHECFG", "DHBEAFCG")));
+        System.out.println(abcdefgh.isEquals(new BinaryTree("ABDHECFG", "HDBEAFCG")));
+        System.out.println(new BinaryTree("ABCDEFG", 0).isEquals(new BinaryTree("ABDECFG", "DBEAFCG")));
+        System.out.println(new BinaryTree("ABCDEFG", 0).isEquals(new BinaryTree("ABDECGF", "DBEAGCF")));
 
+    }
+
+    @Test
+    public void testHuffmanTree() {
+        int[] weight = {23, 11, 5, 3, 29, 14, 7, 8};
+        int[][] huffmanCoding = HuffmanTree.huffmanCoding(weight);
+        HuffmanTree.display(huffmanCoding);
     }
 }
