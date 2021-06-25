@@ -4,8 +4,8 @@ package com.jason.structure.nonlinearity.figure;
  * 图的接口.
  * <pre>
  *     图的存储有：
- *          1.邻接矩阵（其中无向图和无向网的邻接矩阵是对称矩阵，一般采用压缩存储；有向图和有向网的邻接矩阵不对称）。
- *          2.邻接表。
+ *          1.邻接矩阵 AdjacencyMatrixGraph （其中无向图和无向网的邻接矩阵是对称矩阵，一般采用压缩存储；有向图和有向网的邻接矩阵不对称）。
+ *          2.邻接表。 AdjacencyListGraph
  *          3.邻接多重表。
  *          4.十字链表。
  * </pre>
@@ -14,6 +14,49 @@ package com.jason.structure.nonlinearity.figure;
  * @date 2021/6/18 14:25
  **/
 public interface Graph<T> {
+
+    /**
+     * 添加一个顶点
+     *
+     * @param ver 顶点
+     * @throws Exception 异常
+     */
+    void addVertex(T ver) throws Exception;
+
+    /**
+     * 添加一个不带权值的边（图）。
+     *
+     * @param ver1 顶点1
+     * @param ver2 顶点2
+     * @throws Exception 异常
+     */
+    void addEdge(T ver1, T ver2) throws Exception;
+
+    /**
+     * 添加一个带权值的边（网）。
+     *
+     * @param ver1   顶点1
+     * @param ver2   顶点2
+     * @param weight 权值
+     * @throws Exception 异常
+     */
+    void addEdge(T ver1, T ver2, int weight) throws Exception;
+
+    /**
+     * 删除一个顶点，并删除与该顶点有关的边
+     *
+     * @param vertex 顶点
+     */
+    void deleteVertex(T vertex);
+
+    /**
+     * 删除一条边，如果是无向图、网，则同时删除反向的边。
+     *
+     * @param v1 顶点1
+     * @param v2 顶点2
+     * @throws Exception 异常
+     */
+    void deleteEdge(T v1, T v2) throws Exception;
 
     /**
      * 返回图中的顶点数量
@@ -66,6 +109,6 @@ public interface Graph<T> {
     /**
      * 展示输出
      */
-    String display();
+    String display() throws Exception;
 
 }

@@ -1,9 +1,13 @@
 package com.jason.structure.linearity.nonlinearity;
 
+import com.jason.structure.nodes.EdgeNode;
+import com.jason.structure.nodes.VertexNode;
+import com.jason.structure.nonlinearity.figure.AdjacencyListGraph;
 import com.jason.structure.nonlinearity.figure.AdjacencyMatrixGraph;
 import com.jason.structure.nonlinearity.figure.GraphKind;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.Test;
+import org.omg.CORBA.NO_IMPLEMENT;
 
 /**
  * 网和图测试
@@ -13,6 +17,7 @@ import org.junit.Test;
  **/
 public class TestGraph {
 
+    // 测试图的邻接矩阵存储
     @Test
     public void testAdjacencyMatrixGraph() throws Exception {
         // 无向图
@@ -44,7 +49,7 @@ public class TestGraph {
         directedGraph.addEdge("D", "A");
         directedGraph.addEdge("D", "E");
         System.out.println(directedGraph.display());
-        directedGraph.deleteEdge("D","F");
+        directedGraph.deleteEdge("D", "F");
         System.out.println(directedGraph.display());
 
         // 无向网
@@ -79,4 +84,104 @@ public class TestGraph {
 //        directedNetwork.deleteVertex("A");
         System.out.println(directedNetwork.display());
     }
+
+    // 测试图的邻接表存储
+    @Test
+    public void testAdjacencyListGraph() throws Exception {
+
+        // 无向图
+        AdjacencyListGraph<Integer> graph = new AdjacencyListGraph<>(GraphKind.UDG, 5, 5);
+        graph.addVertex(0);
+        graph.addVertex(1);
+        graph.addVertex(2);
+        graph.addVertex(3);
+        graph.addVertex(4);
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 4);
+        graph.addEdge(3, 4);
+        graph.addEdge(3, 2);
+
+//        graph.deleteVertex(1);
+//        graph.deleteEdge(2, 1);
+        System.out.println(graph.display());
+
+        // 有向图
+        AdjacencyListGraph<String> directedGraph = new AdjacencyListGraph<>(GraphKind.DG, 5, 5);
+        directedGraph.addVertex("A");
+        directedGraph.addVertex("B");
+        directedGraph.addVertex("C");
+        directedGraph.addVertex("D");
+        directedGraph.addVertex("E");
+
+        directedGraph.addEdge("A", "B");
+        directedGraph.addEdge("A", "C");
+        directedGraph.addEdge("C", "D");
+        directedGraph.addEdge("D", "A");
+        directedGraph.addEdge("D", "E");
+        System.out.println(directedGraph.display());
+//        directedGraph.deleteVertex("A");
+        directedGraph.deleteEdge("C", "D");
+        System.out.println(directedGraph.display());
+
+    }
+
+    /**
+     * 测试无向网的邻接表存储操作
+     */
+    @Test
+    public void testAdjacencyListGraphUndirectedNetwork() throws Exception {
+        AdjacencyListGraph<String> network = new AdjacencyListGraph<>(GraphKind.UDN, 6, 9);
+        network.addVertex("A");
+        network.addVertex("B");
+        network.addVertex("C");
+        network.addVertex("D");
+        network.addVertex("E");
+        network.addVertex("F");
+        network.addEdge("A", "B", 2);
+        network.addEdge("A", "C", 7);
+        network.addEdge("B", "C", 10);
+        network.addEdge("B", "D", 9);
+        network.addEdge("B", "E", 5);
+        network.addEdge("C", "D", 1);
+        network.addEdge("D", "E", 3);
+        network.addEdge("D", "F", 8);
+        network.addEdge("E", "F", 4);
+        System.out.println(network.display());
+//        network.deleteVertex("B");
+//        network.deleteEdge("D", "C");
+        System.out.println(network.display());
+        System.out.println(network.firstAdjacencyVertex(2));
+        System.out.println("总顶点数：" + network.getVertexCount() + "   总边数：" + network.getEdgeCount());
+        System.out.println("顶点数：" + network.getVertexNum() + "   边数：" + network.getEdgeNum());
+        System.out.println("查找在顶点B中邻接点D的下一个邻接点：" + network.nextAdjacencyVertex("B", "D"));
+    }
+
+    /**
+     * 测试有向网的邻接表存储的操作
+     */
+    @Test
+    public void testAdjacencyListGraphDirectedNetwork() throws Exception {
+        AdjacencyListGraph<String> graph = new AdjacencyListGraph<>(GraphKind.DN, 6, 7);
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
+        graph.addVertex("F");
+        graph.addEdge("A", "B", 5);
+        graph.addEdge("B", "C", 1);
+        graph.addEdge("B", "E", 2);
+        graph.addEdge("D", "B", 4);
+        graph.addEdge("E", "D", 8);
+        graph.addEdge("E", "F", 7);
+        graph.addEdge("F", "D", 9);
+        System.out.println(graph.display());
+//        graph.deleteVertex("D");
+        graph.deleteEdge("E", "B");
+        System.out.println(graph.display());
+
+    }
+
+
 }

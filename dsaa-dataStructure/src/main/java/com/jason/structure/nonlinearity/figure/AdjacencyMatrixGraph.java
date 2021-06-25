@@ -70,6 +70,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * @param ver2 顶点2
      * @throws Exception 异常
      */
+    @Override
     public void addEdge(T ver1, T ver2) throws Exception {
         if (ver1.equals(ver2)) {
             throw new Exception("同一个顶点不能创建边");
@@ -98,6 +99,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * @param weight 权重
      * @throws Exception 异常
      */
+    @Override
     public void addEdge(T ver1, T ver2, int weight) throws Exception {
         if (ver1.equals(ver2)) {
             throw new Exception("同一个顶点不能创建边");
@@ -124,6 +126,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      *
      * @param vertex 顶点
      */
+    @Override
     public void deleteVertex(T vertex) {
         if (vertex == null) return;
         int index = -1;
@@ -156,6 +159,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * @param v1 顶底1
      * @param v2 顶点2
      */
+    @Override
     public void deleteEdge(T v1, T v2) throws Exception {
         if (v1 == null || v2 == null) {
             return;
