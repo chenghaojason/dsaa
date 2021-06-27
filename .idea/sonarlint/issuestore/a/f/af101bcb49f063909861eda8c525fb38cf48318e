@@ -1,7 +1,0 @@
-
-—
-java:S1186D"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•ª¤–
-‡
-java:S1130"qRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from constructor's body.(–çùÒ
-H
-java:S1144Y"-Remove this unused private "getIndex" method.(‰ÛÝ°üÿÿÿÿ
