@@ -1,6 +1,6 @@
 package com.jason.structure.nonlinearity.figure;
 
-import java.util.Arrays;
+import com.jason.structure.nodes.VertexNode;
 
 /**
  * 邻接矩阵存储图
@@ -16,7 +16,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
     private final int edgeNum; // 图的边数
     private final int undirectedMaxEdgeNum; // 无向图的最大边数
     private final int directedMaxEdgeNum; // 有向图的最大变数
-    private final T[] vertexs; // 顶点
+    private final VertexNode<T>[] vertexs; // 顶点
     private final int[][] adjacencyMatrix; // 邻接矩阵
     private int vertexCount; // 目前的顶点数量
     private int edgeCount; // 统计目前边的数量
@@ -25,7 +25,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         this(kind, vertexNum, edgeNum, null, null);
     }
 
-    public AdjacencyMatrixGraph(GraphKind kind, int vertexNum, int edgeNum, T[] vertexs, int[][] adjacencyMatrix) throws Exception {
+    public AdjacencyMatrixGraph(GraphKind kind, int vertexNum, int edgeNum, VertexNode<T>[] vertexs, int[][] adjacencyMatrix) throws Exception {
         if (kind == null) {
             throw new Exception("请选择创建图的类型");
         }
@@ -40,7 +40,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         this.undirectedMaxEdgeNum = vertexNum * (vertexNum - 1) / 2;
         this.directedMaxEdgeNum = vertexNum * (vertexNum - 1);
         if (vertexs == null) {
-            this.vertexs = (T[]) new Object[vertexNum];
+            this.vertexs = new VertexNode[vertexNum];
         } else {
             this.vertexs = vertexs;
             vertexCount = vertexNum;
@@ -59,7 +59,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         if (vertexCount == vertexNum) {
             throw new Exception("顶点已满");
         }
-        vertexs[vertexCount] = ver;
+        vertexs[vertexCount] = new VertexNode<>(ver);
         vertexCount++;
     }
 
@@ -79,8 +79,8 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         if (kind == GraphKind.UDN || kind == GraphKind.DN || flag) {
             throw new Exception("图的边数已到最大值");
         }
-        int index1 = Arrays.binarySearch(vertexs, ver1);
-        int index2 = Arrays.binarySearch(vertexs, ver2);
+        int index1 = getPositon(ver1);
+        int index2 = getPositon(ver2);
         if (index1 < 0 || index2 < 0) {
             throw new Exception("图的边创建失败，不存在的顶点");
         }
@@ -108,8 +108,8 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         if (kind == GraphKind.UDG || kind == GraphKind.DG || flag) {
             throw new Exception("图的边数已到最大值");
         }
-        int index1 = Arrays.binarySearch(vertexs, ver1);
-        int index2 = Arrays.binarySearch(vertexs, ver2);
+        int index1 = getPositon(ver1);
+        int index2 = getPositon(ver2);
         if (index1 < 0 || index2 < 0) {
             throw new Exception("网的边创建失败，不存在的顶点");
         }
@@ -164,8 +164,8 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         if (v1 == null || v2 == null) {
             return;
         }
-        int p1 = Arrays.binarySearch(vertexs, v1);
-        int p2 = Arrays.binarySearch(vertexs, v2);
+        int p1 = getPositon(v1);
+        int p2 = getPositon(v2);
         if (p1 < 0 || p2 < 0) {
             throw new Exception("边 " + v1 + "——" + v2 + " 不存在");
         }
@@ -187,7 +187,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
     }
 
     @Override
-    public T getVertex(int position) throws Exception {
+    public VertexNode<T> getVertex(int position) throws Exception {
         if (position < 0 || position > vertexNum) {
             throw new Exception("第" + position + "个顶点不存在");
         }
@@ -203,7 +203,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
     @Override
     public int getPositon(T vertex) {
         for (int i = 0; i < vertexNum; i++) {
-            if (vertex.equals(vertexs[i])) {
+            if (vertex.equals(vertexs[i].data)) {
                 return i;
             }
         }
@@ -232,13 +232,26 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
 
     @Override
     public int nextAdjacencyVertex(T v, T w) throws Exception {
-        int i = Arrays.binarySearch(vertexs, v);
-        int j = Arrays.binarySearch(vertexs, w);
+        int i = getPositon(v);
+        int j = getPositon(w);
         if (i < 0) {
             throw new Exception("顶点" + v.toString() + "不存在");
         }
         for (int k = j + 1; k < vertexNum; k++) {
             if (adjacencyMatrix[i][k] != 0 && adjacencyMatrix[i][k] < INFINITY) {
+                return k;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public int nextAdjacencyVertex(int start, int from) throws IllegalArgumentException {
+        if (start < 0 || start > vertexNum || from > vertexNum) {
+            throw new IllegalArgumentException("位置不合法");
+        }
+        for (int k = from + 1; k < vertexNum; k++) {
+            if (adjacencyMatrix[start][k] != 0 && adjacencyMatrix[start][k] < INFINITY) {
                 return k;
             }
         }
@@ -253,11 +266,11 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         StringBuilder builder = new StringBuilder("邻接矩阵形式的");
         builder.append(kind.kindDec).append(":\r\n");
         for (int i = 0; i < vertexNum; i++) {
-            builder.append("\t").append(vertexs[i] == null ? " " : vertexs[i]);
+            builder.append("\t").append(vertexs[i] == null ? " " : vertexs[i].data);
         }
         builder.append("\r\n");
         for (int j = 0; j < vertexNum; j++) {
-            builder.append(vertexs[j] == null ? " " : vertexs[j]);
+            builder.append(vertexs[j] == null ? " " : vertexs[j].data);
             for (int k = 0; k < vertexNum; k++) {
                 int value = adjacencyMatrix[j][k];
                 if ((kind == GraphKind.DN || kind == GraphKind.UDN) && value == 0) {
@@ -276,7 +289,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
         return kind;
     }
 
-    public T[] getVertexs() {
+    public VertexNode<T>[] getVertexs() {
         return vertexs;
     }
 

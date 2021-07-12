@@ -72,7 +72,7 @@ public class AdjacencyListGraph<T> implements Graph<T> {
         if (ver1 == null || ver2 == null) {
             throw new NullPointerException("添加的边不存在");
         }
-        if (weight < 1) {
+        if ((kind == GraphKind.DG || kind == GraphKind.DN) && weight < 1) {
             throw new IllegalArgumentException("边的权重值不合法");
         }
         int p1 = getPositon(ver1);
@@ -188,14 +188,14 @@ public class AdjacencyListGraph<T> implements Graph<T> {
     }
 
     @Override
-    public T getVertex(int position) throws Exception {
+    public VertexNode<T> getVertex(int position) throws Exception {
         if (position < 0 || position > vertexNum) {
             throw new Exception("第" + position + "个顶点不存在");
         }
         if (vertexNodes[position] == null) {
             return null;
         }
-        return vertexNodes[position].data;
+        return vertexNodes[position];
     }
 
     @Override
@@ -233,10 +233,19 @@ public class AdjacencyListGraph<T> implements Graph<T> {
         if (pw < 0) {
             return -1;
         }
-        VertexNode<T> vertexNode = vertexNodes[pv];
+
+        return nextAdjacencyVertex(pv, pw);
+    }
+
+    @Override
+    public int nextAdjacencyVertex(int start, int from) throws IllegalArgumentException {
+        if (start < 0 || start > vertexNum || from > vertexNum) {
+            throw new IllegalArgumentException("位置不合法");
+        }
+        VertexNode<T> vertexNode = vertexNodes[start];
         EdgeNode aim = null;
         for (EdgeNode edgeNode = vertexNode.firstEdge; edgeNode != null; edgeNode = edgeNode.nextEdge) {
-            if (edgeNode.adjacencyVertex == pw) {
+            if (edgeNode.adjacencyVertex == from) {
                 aim = edgeNode;
                 break;
             }
@@ -264,7 +273,7 @@ public class AdjacencyListGraph<T> implements Graph<T> {
                     EdgeNode edgeNode = vertexNode.firstEdge;
                     while (edgeNode != null) {
                         builder.append("——>\t"); // 指向下一个边
-                        builder.append(getVertex(edgeNode.adjacencyVertex));
+                        builder.append(getVertex(edgeNode.adjacencyVertex).data);
                         if (kind == GraphKind.DN || kind == GraphKind.UDN) {
                             builder.append(" ").append(edgeNode.value);
                         }

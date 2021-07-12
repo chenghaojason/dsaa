@@ -3,6 +3,7 @@ package com.jason.structure.linearity.nonlinearity;
 import com.jason.structure.nonlinearity.figure.AdjacencyListGraph;
 import com.jason.structure.nonlinearity.figure.AdjacencyMatrixGraph;
 import com.jason.structure.nonlinearity.figure.GraphKind;
+import com.jason.structure.nonlinearity.figure.GraphUtil;
 import org.junit.Test;
 
 /**
@@ -45,8 +46,8 @@ public class TestGraph {
         directedGraph.addEdge("D", "A");
         directedGraph.addEdge("D", "E");
         System.out.println(directedGraph.display());
-        directedGraph.deleteEdge("D", "F");
-        System.out.println(directedGraph.display());
+//        directedGraph.deleteEdge("D", "F");
+//        System.out.println(directedGraph.display());
 
         // 无向网
         AdjacencyMatrixGraph<String> undirectedNetwork = new AdjacencyMatrixGraph<>(GraphKind.UDN, 6, 6);
@@ -79,11 +80,12 @@ public class TestGraph {
         System.out.println(directedNetwork.getPositon("B"));
 //        directedNetwork.deleteVertex("A");
         System.out.println(directedNetwork.display());
+        System.out.println("广度搜索：" + GraphUtil.breadthFirstSearch(directedNetwork));
     }
 
-    // 测试图的邻接表存储
+    // 测试图的邻接表存储 无向图
     @Test
-    public void testAdjacencyListGraph() throws Exception {
+    public void testAdjacencyListGraphUndirectedGraph() throws Exception {
 
         // 无向图
         AdjacencyListGraph<Integer> graph = new AdjacencyListGraph<>(GraphKind.UDG, 5, 5);
@@ -101,7 +103,17 @@ public class TestGraph {
 //        graph.deleteVertex(1);
 //        graph.deleteEdge(2, 1);
         System.out.println(graph.display());
+        System.out.println("广度搜索：" + GraphUtil.breadthFirstSearch(graph));
+        System.out.println("深度搜索：" + GraphUtil.depthFirstSearch(graph));
 
+
+    }
+
+    /**
+     * 测试图的邻接表存储 有 向图
+     */
+    @Test
+    public void testAdjacencyListGraphdirectedGraph() throws Exception {
         // 有向图
         AdjacencyListGraph<String> directedGraph = new AdjacencyListGraph<>(GraphKind.DG, 5, 5);
         directedGraph.addVertex("A");
@@ -117,9 +129,8 @@ public class TestGraph {
         directedGraph.addEdge("D", "E");
         System.out.println(directedGraph.display());
 //        directedGraph.deleteVertex("A");
-        directedGraph.deleteEdge("C", "D");
-        System.out.println(directedGraph.display());
-
+//        directedGraph.deleteEdge("C", "D");
+//        System.out.println(directedGraph.display());
     }
 
     /**
@@ -151,6 +162,7 @@ public class TestGraph {
         System.out.println("总顶点数：" + network.getVertexCount() + "   总边数：" + network.getEdgeCount());
         System.out.println("顶点数：" + network.getVertexNum() + "   边数：" + network.getEdgeNum());
         System.out.println("查找在顶点B中邻接点D的下一个邻接点：" + network.nextAdjacencyVertex("B", "D"));
+        System.out.println("广度搜索：" + GraphUtil.breadthFirstSearch(network));
     }
 
     /**
@@ -174,8 +186,16 @@ public class TestGraph {
         graph.addEdge("F", "D", 9);
         System.out.println(graph.display());
 //        graph.deleteVertex("D");
-        graph.deleteEdge("E", "B");
-        System.out.println(graph.display());
+//        graph.deleteEdge("E", "B");
+//        System.out.println(graph.display());
+
+        System.out.println("广度搜索：" + GraphUtil.breadthFirstSearch(graph));
+        System.out.println("深度搜索：" + GraphUtil.depthFirstSearch(graph));
+
+    }
+
+    @Test
+    public void breadthFirstSearch() {
 
     }
 

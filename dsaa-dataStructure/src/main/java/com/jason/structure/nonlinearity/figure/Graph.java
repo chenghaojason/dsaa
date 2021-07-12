@@ -1,5 +1,7 @@
 package com.jason.structure.nonlinearity.figure;
 
+import com.jason.structure.nodes.VertexNode;
+
 /**
  * 图的接口.
  * <pre>
@@ -73,13 +75,13 @@ public interface Graph<T> {
     int getEdgeNum();
 
     /**
-     * 根据给定顶点的位置position，返回其在图中的顶点值
+     * 根据给定顶点的位置position，返回其在图中的顶点
      *
      * @param position 位置信息，0 <= position <vertexNum
-     * @return 顶点值
+     * @return 顶点
      * @throws Exception 位置不合法异常
      */
-    T getVertex(int position) throws Exception;
+    VertexNode<T> getVertex(int position) throws Exception;
 
     /**
      * 求某个顶点值在图中的位置
@@ -105,6 +107,16 @@ public interface Graph<T> {
      * @return 邻接点
      */
     int nextAdjacencyVertex(T v, T w) throws Exception;
+
+    /**
+     * 返回 顶点start相对于from的下一个顶点，如果下一点顶点不存在，则返回-1
+     *
+     * @param start 顶点的位置
+     * @param from  顶点start的一个邻接顶点位置
+     * @return 下一个顶点的位置
+     * @throws IllegalArgumentException 异常
+     */
+    int nextAdjacencyVertex(int start, int from) throws IllegalArgumentException;
 
     /**
      * 展示输出
